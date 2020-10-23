@@ -1,0 +1,31 @@
+baseURL = "https://memo-in-pxx.progn.cc/"
+languageCode = "en-us"
+title = "读书笔记"
+theme = "beautifulhugo-fix-summary"
+hasCJKLanguage = true
+
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+noClasses = false
+
+[params]
+subtitle = "平行线——深圳技术部——可视化"
+selfHosted = true
+rss = true
+wordCount = true
+logo = "https://picsum.photos/200"
+bigimg = [{ src = "https://picsum.photos/800" }]
+
+[author]
+name = "张唯一"
+email = "zhangweiyi@zzpxx.com"
+github = "dochang"
+
+[[menu.main]]
+name = "分类"
+url = "categories"
+
+[[menu.main]]
+name = "标签"
+url = "tags"

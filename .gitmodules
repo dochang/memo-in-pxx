@@ -1,0 +1,7 @@
+[submodule "themes/beautifulhugo"]
+	path = themes/beautifulhugo
+	url = https://github.com/halogenica/beautifulhugo.git
+[submodule "themes/beautifulhugo-fix-summary"]
+	path = themes/beautifulhugo-fix-summary
+	url = https://github.com/YaguraStation/beautifulhugo.git
+	branch = patch-1
