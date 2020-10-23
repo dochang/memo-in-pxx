@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Rust 程序设计语言 2 - 读书笔记</title>
+  <meta name="description" content="The Rust Programming Language 1.2 节的摘要。">
+  <meta name="author" content="张唯一"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "读书笔记",
+    
+    "url": "https:\/\/memo-in-pxx.progn.cc\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/memo-in-pxx.progn.cc\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-2\/",
+          "name": "Rust 程序设计语言 2"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "张唯一"
+  },
+  "headline": "Rust 程序设计语言 2",
+  "description" : "The Rust Programming Language 1.2 节的摘要。\n",
+  "inLanguage" : "en",
+  "wordCount":  232 ,
+  "datePublished" : "2020-10-23T18:39:39",
+  "dateModified" : "2020-10-23T18:39:39",
+  "image" : "https:\/\/picsum.photos\/200",
+  "keywords" : [ "书摘, 语言" ],
+  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-2\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/memo-in-pxx.progn.cc\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/picsum.photos\/200",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Rust 程序设计语言 2" />
+<meta property="og:description" content="The Rust Programming Language 1.2 节的摘要。">
+<meta property="og:image" content="https://picsum.photos/200" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/trpl-2/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="读书笔记" />
+
+  <meta name="twitter:title" content="Rust 程序设计语言 2" />
+  <meta name="twitter:description" content="The Rust Programming Language 1.2 节的摘要。">
+  <meta name="twitter:image" content="https://picsum.photos/200" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.75.1" />
+  <link rel="alternate" href="https://memo-in-pxx.progn.cc/index.xml" type="application/rss+xml" title="读书笔记"><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/katex.min.css" />
+  <link rel="stylesheet" href="https://memo-in-pxx.progn.cc/fontawesome/css/all.css" />
+  <link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/bootstrap.min.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/main.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/fonts.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/syntax.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/codeblock.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/photoswipe.min.css" />
+  <link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/photoswipe.default-skin.min.css" />
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://memo-in-pxx.progn.cc/">读书笔记</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="分类" href="/categories">分类</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="读书笔记" href="https://memo-in-pxx.progn.cc/">
+            <img class="avatar-img" src="https://picsum.photos/200" alt="读书笔记" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Rust 程序设计语言 2</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a> <a href="https://doc.rust-lang.org/book/ch01-02-hello-world.html">1.2 节</a>的摘要。</p>
+<h1 id="hello-world">Hello, World!</h1>
+<h2 id="建立项目目录">建立项目目录</h2>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ mkdir ~/projects
+$ <span class="nb">cd</span> ~/projects
+$ mkdir hello_world
+$ <span class="nb">cd</span> hello_world
+</code></pre></div><h2 id="编码和运行">编码和运行</h2>
+<p>Rust 代码文件名以 <code>.rs</code> 结尾，当文件名含有多个单词时，使用下划线分隔。例如，使用 <code>hello_world.rs</code> 而不是 <code>helloworld.rs</code> 。</p>
+<p>建立文件 <code>main.rs</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Hello, world!&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span></code></pre></div><p>保存、编译、执行：</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">$ rustc main.rs
+$ ./main
+Hello, world!
+</code></pre></div><p>输出 <code>Hello, world!</code> 表示执行成功。</p>
+<h2 id="分析">分析</h2>
+<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span></code></pre></div><p><code>fn</code> 用于定义函数， <code>main</code> 函数是 Rust 程序的入口。Rust 的风格是 <code>{</code> 与 <code>fn</code> 放在一行。</p>
+<p>使用 <code>rustfmt</code> 将你的代码格式化成 Rust 社区的标准风格。</p>
+<p>Rust 的缩进风格是 4 个空格，不用 TAB 。</p>
+<p><code>println!</code> 是一个宏，如果没有 <code>!</code> ，比如 <code>println</code> ，则是一个函数。</p>
+<p>使用 <code>rustc</code> 编译 <code>.rs</code> 文件。</p>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/%E4%B9%A6%E6%91%98/">书摘</a>&nbsp;
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/%E8%AF%AD%E8%A8%80/">语言</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://memo-in-pxx.progn.cc/posts/trpl-1/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 1">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhangweiyi@zzpxx.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/dochang" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              张唯一
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://memo-in-pxx.progn.cc/">读书笔记</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.75.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://memo-in-pxx.progn.cc/js/katex.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/auto-render.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/jquery.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/bootstrap.min.js"></script>
+
+<script src="https://memo-in-pxx.progn.cc/js/main.js"></script><script> renderMathInElement(document.body); </script><script src="https://memo-in-pxx.progn.cc/js/photoswipe.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/photoswipe-ui-default.min.js"></script><script src="https://memo-in-pxx.progn.cc/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

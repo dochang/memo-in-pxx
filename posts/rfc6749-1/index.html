@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OAuth 2.0 授权框架 1 - 读书笔记</title>
+  <meta name="description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
+  <meta name="author" content="张唯一"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "读书笔记",
+    
+    "url": "https:\/\/memo-in-pxx.progn.cc\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/memo-in-pxx.progn.cc\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-1\/",
+          "name": "O auth 2.0 授权框架 1"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "张唯一"
+  },
+  "headline": "OAuth 2.0 授权框架 1",
+  "description" : "翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。\n",
+  "inLanguage" : "en",
+  "wordCount":  1008 ,
+  "datePublished" : "2020-10-22T19:56:39",
+  "dateModified" : "2020-10-22T19:56:39",
+  "image" : "https:\/\/picsum.photos\/200",
+  "keywords" : [ "RFC, 翻译" ],
+  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-1\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/memo-in-pxx.progn.cc\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/picsum.photos\/200",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="OAuth 2.0 授权框架 1" />
+<meta property="og:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
+<meta property="og:image" content="https://picsum.photos/200" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/rfc6749-1/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="读书笔记" />
+
+  <meta name="twitter:title" content="OAuth 2.0 授权框架 1" />
+  <meta name="twitter:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
+  <meta name="twitter:image" content="https://picsum.photos/200" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.75.1" />
+  <link rel="alternate" href="https://memo-in-pxx.progn.cc/index.xml" type="application/rss+xml" title="读书笔记"><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/katex.min.css" />
+  <link rel="stylesheet" href="https://memo-in-pxx.progn.cc/fontawesome/css/all.css" />
+  <link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/bootstrap.min.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/main.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/fonts.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/syntax.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/codeblock.css" /><link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/photoswipe.min.css" />
+  <link rel="stylesheet" href="https://memo-in-pxx.progn.cc/css/photoswipe.default-skin.min.css" />
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://memo-in-pxx.progn.cc/">读书笔记</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="分类" href="/categories">分类</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="读书笔记" href="https://memo-in-pxx.progn.cc/">
+            <img class="avatar-img" src="https://picsum.photos/200" alt="读书笔记" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>OAuth 2.0 授权框架 1</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>翻译了 <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> 关于 OAuth 2.0 授权框架规范第 1 章的内容。</p>
+<h1 id="摘要">摘要</h1>
+<p>OAuth 2.0 授权框架允许第三方应用得到一个 HTTP 服务的有限制访问权。本规范取代并废弃了描述于 <a href="https://tools.ietf.org/html/rfc5849">RFC 5849</a> 的 OAuth 1.0 协议。</p>
+<h1 id="废话不翻译了">废话不翻译了</h1>
+<h1 id="1-介绍">1. 介绍</h1>
+<p>在传统的客户端-服务器认证模型中，客户端通过使用资源所有者的凭证向服务器认证的方式请求服务器上的一个访问受限的资源（受保护的资源）。为了让第三方应用访问受限资源，资源所有者需要将他的凭证分享给第三方应用。这会带来如下问题与限制：</p>
+<ul>
+<li>第三方应用需要资源所有者的凭证以便未来之用，而凭证多为明文密码之类的格式。</li>
+<li>服务器需要支持密码认证，即便密码本身有安全性问题。</li>
+<li>第三方应用会对资源所有者的受保护资源索要过大的权限，而资源所有者没有能力去限制资源的访问期限或访问范围。</li>
+<li>资源所有者不能在保留其他第三方权限的情况下单独撤销某一第三方的访问权限，除非改变第三方的密码。</li>
+<li>任何第三方应用的安全隐患都会造成用户密码以及该密码保护的所有数据的安全隐患。</li>
+</ul>
+<p>通过引入授权层，将客户端的角色从资源所有者中分离，OAuth 解决了上述问题。在 OAuth 中，客户端向位于资源服务器上的、由资源所有者控制的资源请求访问权限，会得到与资源所有者所持有的完全不同的凭证。</p>
+<p>客户端不再使用资源所有者的凭证来访问受保护资源，而是使用访问令牌——一个指示特定范围、生命周期以及其他访问属性的字符串。在资源所有者的同意下，访问令牌由授权服务器颁发给第三方客户端。客户端使用访问令牌访问位于资源服务器上的受保护资源。</p>
+<p>举例来说，一名最终用户（资源所有者）可以在不分享用户名密码而授权一个打印服务（客户端）访问用户存储于照片分享服务（资源服务器）上的受保护的照片。相反，用户会对照片分享服务（授权服务器）信任的服务器进行鉴权认证，该服务器会为打印服务颁发一个委托限定的凭证（访问令牌）。</p>
+<p>本规范是为 HTTP (<a href="https://tools.ietf.org/html/rfc2616">RFC2616</a>) 使用所设计。在其它任何协议中使用 OAuth 都超出了本规范的范围。</p>
+<p>OAuth 1.0 协议（<a href="https://tools.ietf.org/html/rfc5849">RFC5849</a>），作为一个小型的临时社区的成果，以参考文档的方式发布。本规范属于标准跟踪类，建立在 OAuth 1.0 的部署经验，以及来自 IETF 社区的广泛的使用案例和扩展需求之上。OAuth 2.0 协议不会向后兼容 OAuth 1.0 。这两个版本的协议可以在网络中共存，实现可以同时支持这两种协议。然而本规范的目的是让新的实现按照本文档的描述支持 OAuth 2.0 ，OAuth 1.0 只用于支持已有的部署。OAuth 2.0 协议只从 OAuth 1.0 中复用了很少的实现细节。熟悉 OAuth 1.0 的开发者在阅读本文档时不应该对文档的结构与细节有任何的假设。</p>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/rfc/">RFC</a>&nbsp;
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+          
+            <li class="next">
+              <a href="https://memo-in-pxx.progn.cc/posts/trpl-1/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 1">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhangweiyi@zzpxx.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/dochang" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              张唯一
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://memo-in-pxx.progn.cc/">读书笔记</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.75.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://memo-in-pxx.progn.cc/js/katex.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/auto-render.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/jquery.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/bootstrap.min.js"></script>
+
+<script src="https://memo-in-pxx.progn.cc/js/main.js"></script><script> renderMathInElement(document.body); </script><script src="https://memo-in-pxx.progn.cc/js/photoswipe.min.js"></script>
+<script src="https://memo-in-pxx.progn.cc/js/photoswipe-ui-default.min.js"></script><script src="https://memo-in-pxx.progn.cc/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

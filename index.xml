@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>读书笔记</title>
+    <link>https://memo-in-pxx.progn.cc/</link>
+    <description>Recent content on 读书笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>zhangweiyi@zzpxx.com (张唯一)</managingEditor>
+    <webMaster>zhangweiyi@zzpxx.com (张唯一)</webMaster>
+    <lastBuildDate>Fri, 23 Oct 2020 18:39:39 +0800</lastBuildDate><atom:link href="https://memo-in-pxx.progn.cc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rust 程序设计语言 2</title>
+      <link>https://memo-in-pxx.progn.cc/posts/trpl-2/</link>
+      <pubDate>Fri, 23 Oct 2020 18:39:39 +0800</pubDate>
+      <author>zhangweiyi@zzpxx.com (张唯一)</author>
+      <guid>https://memo-in-pxx.progn.cc/posts/trpl-2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://doc.rust-lang.org/book/&#34;&gt;The Rust Programming Language&lt;/a&gt; &lt;a href=&#34;https://doc.rust-lang.org/book/ch01-02-hello-world.html&#34;&gt;1.2 节&lt;/a&gt;的摘要。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rust 程序设计语言 1</title>
+      <link>https://memo-in-pxx.progn.cc/posts/trpl-1/</link>
+      <pubDate>Fri, 23 Oct 2020 13:32:30 +0800</pubDate>
+      <author>zhangweiyi@zzpxx.com (张唯一)</author>
+      <guid>https://memo-in-pxx.progn.cc/posts/trpl-1/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://doc.rust-lang.org/book/&#34;&gt;The Rust Programming Language&lt;/a&gt; &lt;a href=&#34;https://doc.rust-lang.org/book/ch01-00-getting-started.html&#34;&gt;1.1 节&lt;/a&gt;的摘要。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OAuth 2.0 授权框架 1</title>
+      <link>https://memo-in-pxx.progn.cc/posts/rfc6749-1/</link>
+      <pubDate>Thu, 22 Oct 2020 19:56:39 +0800</pubDate>
+      <author>zhangweiyi@zzpxx.com (张唯一)</author>
+      <guid>https://memo-in-pxx.progn.cc/posts/rfc6749-1/</guid>
+      <description>&lt;p&gt;翻译了 &lt;a href=&#34;https://tools.ietf.org/html/rfc6749&#34;&gt;RFC6749&lt;/a&gt; 关于 OAuth 2.0 授权框架规范第 1 章的内容。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
