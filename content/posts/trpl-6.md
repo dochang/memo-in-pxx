@@ -6,7 +6,7 @@ tags: [书摘, 语言]
 draft: false
 ---
 
-[The Rust Programming Language][trpl] [1.3 节][source]第三部分的摘要。
+[The Rust Programming Language][trpl] [第 2 章][source]第三部分的摘要。
 
 <!--more-->
 
