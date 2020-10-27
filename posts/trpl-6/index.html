@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Rust 程序设计语言 5 - 读书笔记</title>
-  <meta name="description" content="The Rust Programming Language 第 2 章第二部分的摘要。">
+  <title>Rust 程序设计语言 6 - 读书笔记</title>
+  <meta name="description" content="The Rust Programming Language 第 2 章第三部分的摘要。">
   <meta name="author" content="张唯一"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,8 +44,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-5\/",
-          "name": "Rust 程序设计语言 5"
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-6\/",
+          "name": "Rust 程序设计语言 6"
         }
     }]
 }
@@ -56,15 +56,15 @@
   "author": {
     "name" : "张唯一"
   },
-  "headline": "Rust 程序设计语言 5",
-  "description" : "The Rust Programming Language 第 2 章第二部分的摘要。\n",
+  "headline": "Rust 程序设计语言 6",
+  "description" : "The Rust Programming Language 第 2 章第三部分的摘要。\n",
   "inLanguage" : "en",
-  "wordCount":  476 ,
-  "datePublished" : "2020-10-26T18:44:36",
-  "dateModified" : "2020-10-26T18:44:36",
+  "wordCount":  195 ,
+  "datePublished" : "2020-10-27T18:33:09",
+  "dateModified" : "2020-10-27T18:33:09",
   "image" : "https:\/\/picsum.photos\/200",
   "keywords" : [ "书摘, 语言" ],
-  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-5\/",
+  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-6\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/memo-in-pxx.progn.cc\/",
@@ -78,15 +78,15 @@
 }
 </script>
 
-<meta property="og:title" content="Rust 程序设计语言 5" />
-<meta property="og:description" content="The Rust Programming Language 第 2 章第二部分的摘要。">
+<meta property="og:title" content="Rust 程序设计语言 6" />
+<meta property="og:description" content="The Rust Programming Language 第 2 章第三部分的摘要。">
 <meta property="og:image" content="https://picsum.photos/200" />
-<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/trpl-5/" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/trpl-6/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="读书笔记" />
 
-  <meta name="twitter:title" content="Rust 程序设计语言 5" />
-  <meta name="twitter:description" content="The Rust Programming Language 第 2 章第二部分的摘要。">
+  <meta name="twitter:title" content="Rust 程序设计语言 6" />
+  <meta name="twitter:description" content="The Rust Programming Language 第 2 章第三部分的摘要。">
   <meta name="twitter:image" content="https://picsum.photos/200" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.75.1" />
@@ -216,7 +216,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Rust 程序设计语言 5</h1>
+                <h1>Rust 程序设计语言 6</h1>
               
               
                 <hr class="small">
@@ -236,25 +236,13 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a> <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">第 2 章</a>第二部分的摘要。</p>
+        <p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a> <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">第 2 章</a>第三部分的摘要。</p>
 <h1 id="编写一个猜数字游戏">编写一个猜数字游戏</h1>
-<h2 id="生成要猜的数字">生成要猜的数字</h2>
-<h3 id="使用-crate-得到更多功能">使用 crate 得到更多功能</h3>
-<p>修改 <code>Cargo.toml</code> ，将 <code>rand</code> 加入依赖列表：</p>
-<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
-<span class="nx">rand</span> <span class="p">=</span> <span class="s2">&#34;0.5.5&#34;</span>
-</code></pre></div><p>Rust 的依赖被称为 Crate 。一个 Crate 就是一个 Rust 源代码文件的集合。我们建立的项目用于生成可执行文件，因此是一个 binary crate 。<code>rand</code> 这样的依赖用于被其他程序使用，因此是一个 library crate 。</p>
-<p>Cargo 使用<a href="https://semver.org/">语义版本号</a>规范。本例中，<code>0.5.5</code> 是 <code>^0.5.5</code> 的简写形式，表示“公共 API 兼容 0.5.5 版本的任何版本”。</p>
-<p>Rust 社区的软件仓库位于 <a href="https://crates.io/">Crates.io</a></p>
-<h4 id="使用-cargolock-确保可重现的构建">使用 <code>Cargo.lock</code> 确保可重现的构建</h4>
-<p>首次运行 <code>cargo build</code> 时会建立 <code>Cargo.lock</code> 文件，Cargo 会将所有依赖和他们的版本号写入 <code>Cargo.lock</code> 。第二次构建时，Cargo 会检查该文件是否存在，如果存在，就使用此文件中指定的版本，而不再计算各依赖对应的版本。这可以保证构建是可重现的。</p>
-<h4 id="更新新版本的-crate">更新新版本的 Crate</h4>
-<p>使用 <code>cargo update</code> 可以根据 <code>Cargo.toml</code> 重新计算各依赖的版本并将结果更新到 <code>Cargo.lock</code> 中。</p>
-<h3 id="生成随机数">生成随机数</h3>
-<p>修改 <code>src/main.rs</code> ：</p>
+<h2 id="进行比较">进行比较</h2>
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cmp</span>::<span class="n">Ordering</span><span class="p">;</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="c1">// `rand::Rng` 是一个 trait
+</span><span class="w"></span><span class="c1">// 一个枚举类型，用于测试比较的结果。
 </span><span class="c1"></span><span class="w">
 </span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span><span class="w">
 </span><span class="w">
@@ -263,17 +251,8 @@
 </span><span class="w">
 </span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">secret_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">);</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="c1">// `rand::thread_rng` 返回一个在当前线程有效的随机数生成器，种子由操作系统提供。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// `gen_range` 由 `Rng` trait 定义，由 `use rang::Rng` 引入到当前作用域。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// 执行 `cargo doc` 会生成当前项目以及所有依赖的文档，位于 `target/doc` 。
-</span><span class="c1"></span><span class="w">    </span><span class="c1">// 执行 `cargo doc --open` 会自动在浏览器中打开文档页面。
-</span><span class="c1"></span><span class="w">
 </span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;The secret number is: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">secret_number</span><span class="p">);</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="c1">// 调试用
-</span><span class="c1"></span><span class="w">
 </span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Please input your guess.&#34;</span><span class="p">);</span><span class="w">
 </span><span class="w">
 </span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
@@ -282,8 +261,25 @@
 </span><span class="w">        </span><span class="p">.</span><span class="n">read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="p">)</span><span class="w">
 </span><span class="w">        </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Failed to read line&#34;</span><span class="p">);</span><span class="w">
 </span><span class="w">
+</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">guess</span>: <span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">trim</span><span class="p">().</span><span class="n">parse</span><span class="p">().</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Please type a number!&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="c1">// Rust 允许我们用一个变量掩盖掉一个同名变量。
+</span><span class="c1"></span><span class="w">
+</span><span class="w">    </span><span class="c1">// `parse` 可以将字符串解析为多种数字类型，所以需要指定 `guess` 的类型，比
+</span><span class="c1"></span><span class="w">    </span><span class="c1">// 如 `let guess: u32` 表示新的 `guess` 变量是 `u32` 类型，即一个 32 位无符
+</span><span class="c1"></span><span class="w">    </span><span class="c1">// 号整数。
+</span><span class="c1"></span><span class="w">
 </span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;You guessed: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secret_number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Less</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Too small!&#34;</span><span class="p">),</span><span class="w">
+</span><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Greater</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Too big!&#34;</span><span class="p">),</span><span class="w">
+</span><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Equal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;You win!&#34;</span><span class="p">),</span><span class="w">
+</span><span class="w">    </span><span class="p">}</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="c1">// `match` 用于分支判断，`match` 的分支称为 *arms* 。每一个 arm 由一个模式
+</span><span class="c1"></span><span class="w">    </span><span class="c1">// 和对应要执行的代码组成。
+</span><span class="c1"></span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
         
@@ -305,13 +301,9 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://memo-in-pxx.progn.cc/posts/trpl-4/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 4">&larr; Previous Post</a>
+              <a href="https://memo-in-pxx.progn.cc/posts/trpl-5/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 5">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://memo-in-pxx.progn.cc/posts/trpl-6/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 6">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
