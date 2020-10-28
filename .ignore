@@ -1,0 +1,4 @@
+*.min.css
+*.min.js
+**/static/js/mermaid.js
+**/static/js/recaptcha.js
