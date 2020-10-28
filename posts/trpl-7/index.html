@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Rust 程序设计语言 4 - 读书笔记</title>
-  <meta name="description" content="The Rust Programming Language 第 2 章第一部分的摘要。">
+  <title>Rust 程序设计语言 7 - 读书笔记</title>
+  <meta name="description" content="The Rust Programming Language 第 2 章第四部分的摘要。">
   <meta name="author" content="张唯一"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,8 +44,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-4\/",
-          "name": "Rust 程序设计语言 4"
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-7\/",
+          "name": "Rust 程序设计语言 7"
         }
     }]
 }
@@ -56,15 +56,15 @@
   "author": {
     "name" : "张唯一"
   },
-  "headline": "Rust 程序设计语言 4",
-  "description" : "The Rust Programming Language 第 2 章第一部分的摘要。\n",
+  "headline": "Rust 程序设计语言 7",
+  "description" : "The Rust Programming Language 第 2 章第四部分的摘要。\n",
   "inLanguage" : "en",
-  "wordCount":  372 ,
-  "datePublished" : "2020-10-25T17:54:10",
-  "dateModified" : "2020-10-25T17:54:10",
+  "wordCount":  356 ,
+  "datePublished" : "2020-10-28T18:48:09",
+  "dateModified" : "2020-10-28T18:48:09",
   "image" : "https:\/\/picsum.photos\/200",
   "keywords" : [ "书摘, 语言" ],
-  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-4\/",
+  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/trpl-7\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/memo-in-pxx.progn.cc\/",
@@ -78,15 +78,15 @@
 }
 </script>
 
-<meta property="og:title" content="Rust 程序设计语言 4" />
-<meta property="og:description" content="The Rust Programming Language 第 2 章第一部分的摘要。">
+<meta property="og:title" content="Rust 程序设计语言 7" />
+<meta property="og:description" content="The Rust Programming Language 第 2 章第四部分的摘要。">
 <meta property="og:image" content="https://picsum.photos/200" />
-<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/trpl-4/" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/trpl-7/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="读书笔记" />
 
-  <meta name="twitter:title" content="Rust 程序设计语言 4" />
-  <meta name="twitter:description" content="The Rust Programming Language 第 2 章第一部分的摘要。">
+  <meta name="twitter:title" content="Rust 程序设计语言 7" />
+  <meta name="twitter:description" content="The Rust Programming Language 第 2 章第四部分的摘要。">
   <meta name="twitter:image" content="https://picsum.photos/200" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.76.5" />
@@ -216,7 +216,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Rust 程序设计语言 4</h1>
+                <h1>Rust 程序设计语言 7</h1>
               
               
                 <hr class="small">
@@ -236,53 +236,57 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a> <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">第 2 章</a>第一部分的摘要。</p>
+        <p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a> <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">第 2 章</a>第四部分的摘要。</p>
 <h1 id="编写一个猜数字游戏">编写一个猜数字游戏</h1>
-<h2 id="初始化项目">初始化项目</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ cargo new guessing_game
-$ <span class="nb">cd</span> guessing_game
-</code></pre></div><h2 id="处理输入">处理输入</h2>
-<p>修改 <code>src/main.rs</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span><span class="w">
+<h2 id="实现循环猜测">实现循环猜测</h2>
+<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cmp</span>::<span class="n">Ordering</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="c1">// Rust 默认只会从 `std::prelude` 导入很少的内容到主程序中，其他类型需要使用
-</span><span class="c1">// `use` 显式导入。
-</span><span class="c1"></span><span class="w">
 </span><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Guess the number!&#34;</span><span class="p">);</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Please input your guess.&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">secret_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">);</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">        </span><span class="c1">// `loop` 关键字用于建立一个无限循环。
+</span><span class="c1"></span><span class="w">
+</span><span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Please input your guess.&#34;</span><span class="p">);</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="c1">// Rust 使用 `let` 声明变量，默认是*不可变*的，如果需要声明可变变量，使用
-</span><span class="c1"></span><span class="w">    </span><span class="c1">// `let mut` 。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// `String` 使用 UTF-8 编码。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// `::` 表示 `new` 是 `String` 类型的_关联函数_。关联函数实现于类型之上，而
-</span><span class="c1"></span><span class="w">    </span><span class="c1">// 非实例。某些语言称其为_静态方法_。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="n">io</span>::<span class="n">stdin</span><span class="p">()</span><span class="w">
-</span><span class="w">        </span><span class="p">.</span><span class="n">read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="p">)</span><span class="w">
-</span><span class="w">        </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Failed to read line&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="c1">// `std::io::stdin` 函数返回 `std::io::Stdin` 的一个实例。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// `&amp;` 表示该参数为引用。引用默认是不可变的，如果需要可变引用，使用 `&amp;mut` 。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// `read_line` 的返回值为 `io::Result` 类型。Result 类型属于枚举。枚举就是
-</span><span class="c1"></span><span class="w">    </span><span class="c1">// 值为固定集合的类型。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// 对于 Result 类型来说，其值为 `Ok` 或 `Err` 。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="c1">// 如果 `Err` 调用 `expect` ，会引起程序崩溃并将传入的参数作为错误信息输出。如果 `Ok` 调用 `expect` ，会返回 `Ok` 所持有的值。
-</span><span class="c1"></span><span class="w">
-</span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;You guessed: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
+</span><span class="w">        </span><span class="n">io</span>::<span class="n">stdin</span><span class="p">()</span><span class="w">
+</span><span class="w">            </span><span class="p">.</span><span class="n">read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="p">)</span><span class="w">
+</span><span class="w">            </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Failed to read line&#34;</span><span class="p">);</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="c1">// `{}` 表示这里输出一个参数。`{}` 可以使用多次来表示多个参数，按顺序对应。
-</span><span class="c1"></span><span class="p">}</span><span class="w">
-</span></code></pre></div>
+</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">guess</span>: <span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">trim</span><span class="p">().</span><span class="n">parse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num</span><span class="p">,</span><span class="w">
+</span><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">continue</span><span class="p">,</span><span class="w">
+</span><span class="w">        </span><span class="p">};</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="c1">// 为了避免用户输入的字符串转换数字失败导致程序退出循环，这里使用
+</span><span class="c1"></span><span class="w">        </span><span class="c1">// `match` 代替 `expect` 。
+</span><span class="c1"></span><span class="w">
+</span><span class="w">        </span><span class="c1">// `num` 为实际转换后的值，保存在 `Ok` 中。
+</span><span class="c1"></span><span class="w">
+</span><span class="w">        </span><span class="c1">// `_` 表示匹配任何 `Err` 。`continue` 表示结束当前循环，开始下一次循环。
+</span><span class="c1"></span><span class="w">
+</span><span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;You guessed: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secret_number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">            </span><span class="n">Ordering</span>::<span class="n">Less</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Too small!&#34;</span><span class="p">),</span><span class="w">
+</span><span class="w">            </span><span class="n">Ordering</span>::<span class="n">Greater</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Too big!&#34;</span><span class="p">),</span><span class="w">
+</span><span class="w">            </span><span class="n">Ordering</span>::<span class="n">Equal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">                </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;You win!&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w">
+</span><span class="w">                </span><span class="c1">// 当用户猜中数字时退出循环。因为循环是程序的最后一个部分，因此
+</span><span class="c1"></span><span class="w">                </span><span class="c1">// 退出循环也就退出了程序。
+</span><span class="c1"></span><span class="w">            </span><span class="p">}</span><span class="w">
+</span><span class="w">        </span><span class="p">}</span><span class="w">
+</span><span class="w">    </span><span class="p">}</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id="总结">总结</h2>
+<p>通过实际编写猜数字这个项目，我们了解了 Rust 带来的一些新的概念： <code>let</code> 、 <code>match</code> 、方法、关联函数、 crate 等等。在接下来的几章中，我们将更详细的学习这些信息。第三章涵盖了大多数语言都有的概念，例如变量、数据类型、函数。第四章解释了所有权，一个令 Rust 有别于其他语言的特色。第五章讨论了结构体和方法。第六章解释了枚举是如何工作的。</p>
 
         
           <div class="blog-tags">
@@ -303,13 +307,9 @@ $ <span class="nb">cd</span> guessing_game
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://memo-in-pxx.progn.cc/posts/trpl-3/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 3">&larr; Previous Post</a>
+              <a href="https://memo-in-pxx.progn.cc/posts/trpl-6/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 6">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://memo-in-pxx.progn.cc/posts/trpl-5/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 5">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
