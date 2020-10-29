@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>RFC - 读书笔记</title>
+  <title>OAuth 2.0 授权框架 2 - 读书笔记</title>
+  <meta name="description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
   <meta name="author" content="张唯一"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -28,14 +29,64 @@
   
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-2\/",
+          "name": "O auth 2.0 授权框架 2"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "张唯一"
+  },
+  "headline": "OAuth 2.0 授权框架 2",
+  "description" : "翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。\n",
+  "inLanguage" : "en",
+  "wordCount":  328 ,
+  "datePublished" : "2020-10-29T18:21:18",
+  "dateModified" : "2020-10-29T18:21:18",
+  "image" : "https:\/\/picsum.photos\/200",
+  "keywords" : [ "RFC, 翻译" ],
+  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-2\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/memo-in-pxx.progn.cc\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/picsum.photos\/200",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
 
-<meta property="og:title" content="RFC" />
+<meta property="og:title" content="OAuth 2.0 授权框架 2" />
+<meta property="og:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
 <meta property="og:image" content="https://picsum.photos/200" />
-<meta property="og:url" content="https://memo-in-pxx.progn.cc/tags/rfc/" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/rfc6749-2/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="读书笔记" />
 
-  <meta name="twitter:title" content="RFC" />
+  <meta name="twitter:title" content="OAuth 2.0 授权框架 2" />
+  <meta name="twitter:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
   <meta name="twitter:image" content="https://picsum.photos/200" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.76.5" />
@@ -163,9 +214,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="tags-heading">
+            <div class="posts-heading">
               
-                <h1>RFC</h1>
+                <h1>OAuth 2.0 授权框架 2</h1>
               
               
                 <hr class="small">
@@ -181,111 +232,58 @@
 
 
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>翻译了 <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> 关于 OAuth 2.0 授权框架规范第 1 章的内容。</p>
+<h1 id="1-介绍">1. 介绍</h1>
+<h2 id="11-角色">1.1. 角色</h2>
+<p>OAuth 定义了四种角色：</p>
+<dl>
+<dt>资源所有者</dt>
+<dd>能够为第三方授权以访问受保护资源的实体。如果一个资源所有者是人，我们称其为最终用户。</dd>
+<dt>资源服务器</dt>
+<dd>存放受保护资源的服务器，能够接受并响应使用访问令牌的对受保护资源的请求。</dd>
+<dt>客户端</dt>
+<dd>一个应用，代表资源所有者，并使用他的授权，向受保护资源发出请求。术语“客户端”不蕴含任何特定的实现特征（例如，应用可能在服务器上执行，也可能在桌面或其他设备上执行）。</dd>
+<dt>授权服务器</dt>
+<dd>在认证了资源所有者并获得授权之后，向客户端发放访问令牌的服务器。</dd>
+</dl>
+<p>授权服务器和资源服务器的交互已经超出了本规范讨论的范围。授权服务器和资源服务器可以是同一个实体也可以是分开的实体。一个授权服务器可以为多个资源服务器发放访问令牌。</p>
+
         
-        <div class="posts-list">
+          <div class="blog-tags">
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/rfc/">RFC</a>&nbsp;
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
           
-            <article class="post-preview">
-    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-2/">
-        <h2 class="post-title">OAuth 2.0 授权框架 2</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on October 29, 2020
-  
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;328&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;张唯一
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-            <p>翻译了 <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> 关于 OAuth 2.0 授权框架规范第 1 章的内容。</p>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://memo-in-pxx.progn.cc//tags/rfc/">RFC</a>&nbsp;
-        
-        <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-
+            <li class="previous">
+              <a href="https://memo-in-pxx.progn.cc/posts/trpl-7/" data-toggle="tooltip" data-placement="top" title="Rust 程序设计语言 7">&larr; Previous Post</a>
+            </li>
           
-            <article class="post-preview">
-    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-1/">
-        <h2 class="post-title">OAuth 2.0 授权框架 1</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on October 22, 2020
-  
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1008&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;张唯一
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-            <p>翻译了 <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> 关于 OAuth 2.0 授权框架规范第 1 章的内容。</p>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://memo-in-pxx.progn.cc//tags/rfc/">RFC</a>&nbsp;
-        
-        <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-
           
-        </div>
-        
-      </div>
+        </ul>
+      
+
+
+      
+
     </div>
   </div>
+</div>
 
       
 <footer>
@@ -312,7 +310,7 @@
               </li>
           
           <li>
-            <a href="/tags/rfc/index.xml" title="RSS">
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
