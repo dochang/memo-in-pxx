@@ -1,7 +1,7 @@
 baseURL = "https://memo-in-pxx.progn.cc/"
 languageCode = "en-us"
 title = "读书笔记"
-theme = "beautifulhugo-fix-summary"
+theme = "beautifulhugo-next"
 hasCJKLanguage = true
 
 [markup.highlight]

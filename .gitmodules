@@ -5,3 +5,7 @@
 	path = themes/beautifulhugo-fix-summary
 	url = https://github.com/YaguraStation/beautifulhugo.git
 	branch = patch-1
+[submodule "themes/beautifulhugo-next"]
+	path = themes/beautifulhugo-next
+	url = https://github.com/dochang/beautifulhugo.git
+	branch = next
