@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Overview of all pages with the tag #标签 - 读书笔记</title>
-  <meta name="description" content="Overview of all pages with the tag #标签, such as: RFC">
+  <title>OAuth 2.0 授权框架 4 - 读书笔记</title>
+  <meta name="description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
   <meta name="author" content="张唯一"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -29,14 +29,64 @@
   
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-4\/",
+          "name": "O auth 2.0 授权框架 4"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "张唯一"
+  },
+  "headline": "OAuth 2.0 授权框架 4",
+  "description" : "翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。\n",
+  "inLanguage" : "en",
+  "wordCount":  402 ,
+  "datePublished" : "2020-10-31T18:25:53",
+  "dateModified" : "2020-10-31T18:25:53",
+  "image" : "https:\/\/picsum.photos\/200",
+  "keywords" : [ "RFC, 翻译" ],
+  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-4\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/memo-in-pxx.progn.cc\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/picsum.photos\/200",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
 
-<meta property="og:title" content="标签" />
+<meta property="og:title" content="OAuth 2.0 授权框架 4" />
+<meta property="og:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
 <meta property="og:image" content="https://picsum.photos/200" />
-<meta property="og:url" content="https://memo-in-pxx.progn.cc/tags/" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/rfc6749-4/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="读书笔记" />
 
-  <meta name="twitter:title" content="标签" />
+  <meta name="twitter:title" content="OAuth 2.0 授权框架 4" />
+  <meta name="twitter:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
   <meta name="twitter:image" content="https://picsum.photos/200" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.76.5" />
@@ -164,9 +214,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="tags-heading">
+            <div class="posts-heading">
               
-                <h1>标签</h1>
+                <h1>OAuth 2.0 授权框架 4</h1>
               
               
                 <hr class="small">
@@ -182,144 +232,51 @@
 
 
     
-
-
-
 <div class="container" role="main">
-  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> 
-    <article class="post-preview">
-      <div class="panel-group" id="accordion">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>翻译了 <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> 关于 OAuth 2.0 授权框架规范第 1 章的内容。</p>
+<h1 id="1-介绍">1. 介绍</h1>
+<h2 id="13-授权许可">1.3. 授权许可</h2>
+<p>一个授权许可是一个证书，描述了资源所有者对访问其受保护资源的授权。客户端使用该许可获取访问令牌。本规范定义了四种许可类型：授权码、隐式、资源所有者口令证书、客户端证书。另外，可以通过扩展机制定义更多的许可类型。</p>
+<h3 id="131-授权码">1.3.1. 授权码</h3>
+<p>授权码的获取方法是，在客户端和资源所有者之间放置一个授权服务器作为中介，通过授权服务器获得授权码。客户端不直接向资源所有者请求授权，而是将资源所有者导向一个授权服务器（通过 <a href="https://tools.ietf.org/html/rfc2616">RFC2616</a> 定义的 user-agent ）。然后再让资源所有者带着授权码回到客户端。</p>
+<p>在将资源所有者定向回到客户端之前，授权服务器对资源所有者进行认证并获得授权。因为资源所有者只在授权服务器上做认证，所以证书不会被客户端共享。</p>
+<p>授权码提供了一些重要的安全优势，比如认证客户端的能力，比如直接将访问令牌传输到客户端，不需要通过资源所有者的 user-agent ，避免了令牌被暴露给第三方（包括资源所有者）的风险。</p>
+
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse书摘" data-parent="#accordion">
-                <div class="panel-heading" id="header书摘">
-                  <h4 class="panel-title">
-                      书摘
-                    <span class="badge">7</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapse书摘" class="panel-collapse collapse">
-              <div class="panel-body">
-                <a href="https://memo-in-pxx.progn.cc//tags/%E4%B9%A6%E6%91%98/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-7/" class="list-group-item">Rust 程序设计语言 7</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-6/" class="list-group-item">Rust 程序设计语言 6</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-5/" class="list-group-item">Rust 程序设计语言 5</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-4/" class="list-group-item">Rust 程序设计语言 4</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-3/" class="list-group-item">Rust 程序设计语言 3</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-2/" class="list-group-item">Rust 程序设计语言 2</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-1/" class="list-group-item">Rust 程序设计语言 1</a>
-                  
-                </div>
-              </div>
-            </div>
+          <div class="blog-tags">
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/rfc/">RFC</a>&nbsp;
+            
+              <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
+            
           </div>
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse语言" data-parent="#accordion">
-                <div class="panel-heading" id="header语言">
-                  <h4 class="panel-title">
-                      语言
-                    <span class="badge">7</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapse语言" class="panel-collapse collapse">
-              <div class="panel-body">
-                <a href="https://memo-in-pxx.progn.cc//tags/%E8%AF%AD%E8%A8%80/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-7/" class="list-group-item">Rust 程序设计语言 7</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-6/" class="list-group-item">Rust 程序设计语言 6</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-5/" class="list-group-item">Rust 程序设计语言 5</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-4/" class="list-group-item">Rust 程序设计语言 4</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-3/" class="list-group-item">Rust 程序设计语言 3</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-2/" class="list-group-item">Rust 程序设计语言 2</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/trpl-1/" class="list-group-item">Rust 程序设计语言 1</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapserfc" data-parent="#accordion">
-                <div class="panel-heading" id="headerrfc">
-                  <h4 class="panel-title">
-                      rfc
-                    <span class="badge">4</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapserfc" class="panel-collapse collapse">
-              <div class="panel-body">
-                <a href="https://memo-in-pxx.progn.cc//tags/rfc/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-4/" class="list-group-item">OAuth 2.0 授权框架 4</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-3/" class="list-group-item">OAuth 2.0 授权框架 3</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-2/" class="list-group-item">OAuth 2.0 授权框架 2</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-1/" class="list-group-item">OAuth 2.0 授权框架 1</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse翻译" data-parent="#accordion">
-                <div class="panel-heading" id="header翻译">
-                  <h4 class="panel-title">
-                      翻译
-                    <span class="badge">4</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapse翻译" class="panel-collapse collapse">
-              <div class="panel-body">
-                <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-4/" class="list-group-item">OAuth 2.0 授权框架 4</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-3/" class="list-group-item">OAuth 2.0 授权框架 3</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-2/" class="list-group-item">OAuth 2.0 授权框架 2</a>
-                  
-                    <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-1/" class="list-group-item">OAuth 2.0 授权框架 1</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-      </div>
-    </article>
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-3/" data-toggle="tooltip" data-placement="top" title="OAuth 2.0 授权框架 3">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+
+    </div>
   </div>
 </div>
-
-
 
       
 <footer>
@@ -346,7 +303,7 @@
               </li>
           
           <li>
-            <a href="/tags/index.xml" title="RSS">
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
