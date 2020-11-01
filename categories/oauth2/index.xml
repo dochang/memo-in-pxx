@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>zhangweiyi@zzpxx.com (张唯一)</managingEditor>
     <webMaster>zhangweiyi@zzpxx.com (张唯一)</webMaster>
-    <lastBuildDate>Sat, 31 Oct 2020 18:25:53 +0800</lastBuildDate><atom:link href="https://memo-in-pxx.progn.cc/categories/oauth2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2020 18:40:19 +0800</lastBuildDate><atom:link href="https://memo-in-pxx.progn.cc/categories/oauth2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OAuth 2.0 授权框架 5</title>
+      <link>https://memo-in-pxx.progn.cc/posts/rfc6749-5/</link>
+      <pubDate>Sun, 01 Nov 2020 18:40:19 +0800</pubDate>
+      <author>zhangweiyi@zzpxx.com (张唯一)</author>
+      <guid>https://memo-in-pxx.progn.cc/posts/rfc6749-5/</guid>
+      <description>&lt;p&gt;翻译了 &lt;a href=&#34;https://tools.ietf.org/html/rfc6749&#34;&gt;RFC6749&lt;/a&gt; 关于 OAuth 2.0 授权框架规范第 1 章的内容。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>OAuth 2.0 授权框架 4</title>
       <link>https://memo-in-pxx.progn.cc/posts/rfc6749-4/</link>
