@@ -23,6 +23,15 @@ email = "zhangweiyi@zzpxx.com"
 github = "dochang"
 
 [[menu.main]]
+name = "讲稿"
+identifier = "slides"
+
+[[menu.main]]
+parent = "slides"
+name = "Linux GUI 环境介绍"
+url = "slides/linux-gui"
+
+[[menu.main]]
 name = "分类"
 url = "categories"
 
