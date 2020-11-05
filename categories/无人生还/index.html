@@ -7,8 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OAuth 2.0 授权框架 8 - 读书笔记</title>
-  <meta name="description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
+  <title>无人生还 - 读书笔记</title>
   <meta name="author" content="张唯一"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -29,64 +28,14 @@
   
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/memo-in-pxx.progn.cc\/",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-8\/",
-          "name": "O auth 2.0 授权框架 8"
-        }
-    }]
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "张唯一"
-  },
-  "headline": "OAuth 2.0 授权框架 8",
-  "description" : "翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。\n",
-  "inLanguage" : "en",
-  "wordCount":  770 ,
-  "datePublished" : "2020-11-04T18:49:00",
-  "dateModified" : "2020-11-04T18:49:00",
-  "image" : "https:\/\/picsum.photos\/200",
-  "keywords" : [ "RFC, 翻译" ],
-  "mainEntityOfPage" : "https:\/\/memo-in-pxx.progn.cc\/posts\/rfc6749-8\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/memo-in-pxx.progn.cc\/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/picsum.photos\/200",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-}
-</script>
 
-<meta property="og:title" content="OAuth 2.0 授权框架 8" />
-<meta property="og:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
+<meta property="og:title" content="无人生还" />
 <meta property="og:image" content="https://picsum.photos/200" />
-<meta property="og:url" content="https://memo-in-pxx.progn.cc/posts/rfc6749-8/" />
+<meta property="og:url" content="https://memo-in-pxx.progn.cc/categories/%E6%97%A0%E4%BA%BA%E7%94%9F%E8%BF%98/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="读书笔记" />
 
-  <meta name="twitter:title" content="OAuth 2.0 授权框架 8" />
-  <meta name="twitter:description" content="翻译了 RFC6749 关于 OAuth 2.0 授权框架规范第 1 章的内容。">
+  <meta name="twitter:title" content="无人生还" />
   <meta name="twitter:image" content="https://picsum.photos/200" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.77.0" />
@@ -225,9 +174,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="posts-heading">
+            <div class="categories-heading">
               
-                <h1>OAuth 2.0 授权框架 8</h1>
+                <h1>无人生还</h1>
               
               
                 <hr class="small">
@@ -243,100 +192,64 @@
 
 
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>翻译了 <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> 关于 OAuth 2.0 授权框架规范第 1 章的内容。</p>
-<h1 id="1-介绍">1. 介绍</h1>
-<h2 id="15-刷新令牌">1.5. 刷新令牌</h2>
-<p>刷新令牌是用于获取访问令牌的凭证。刷新令牌由授权服务器发放给客户端。客户端可以在现有的访问令牌失效、过期时使用刷新令牌获取新的访问令牌。也可以使用刷新令牌获取一个作用范围相同或更严格的另一个访问令牌（访问令牌的生存期和权限可以比资源所有者授权的范围更严格）。发放刷新令牌是可选的，是否发放由授权服务器决定。如果授权服务器发放刷新令牌，则与访问令牌一起发放。</p>
-<p>刷新令牌是一个字符串，表示了资源所有者对客户端的授权许可，内容通常对客户端不透明。刷新令牌表示一个用来获取授权信息的标识符。与访问令牌不同的是，刷新令牌只用于授权服务器并且永远不会发送到资源服务器。</p>
-<p>下图描述了刷新一个过期访问令牌的流程：</p>
-<div class="highlight"><pre class="chroma"><code class="language-plaintext" data-lang="plaintext">  +--------+                                           +---------------+
-  |        |--(A)------- Authorization Grant ---------&gt;|               |
-  |        |                                           |               |
-  |        |&lt;-(B)----------- Access Token -------------|               |
-  |        |               &amp; Refresh Token             |               |
-  |        |                                           |               |
-  |        |                            +----------+   |               |
-  |        |--(C)---- Access Token ----&gt;|          |   |               |
-  |        |                            |          |   |               |
-  |        |&lt;-(D)- Protected Resource --| Resource |   | Authorization |
-  | Client |                            |  Server  |   |     Server    |
-  |        |--(E)---- Access Token ----&gt;|          |   |               |
-  |        |                            |          |   |               |
-  |        |&lt;-(F)- Invalid Token Error -|          |   |               |
-  |        |                            +----------+   |               |
-  |        |                                           |               |
-  |        |--(G)----------- Refresh Token -----------&gt;|               |
-  |        |                                           |               |
-  |        |&lt;-(H)----------- Access Token -------------|               |
-  +--------+           &amp; Optional Refresh Token        +---------------+
-</code></pre></div><ol>
-<li>
-<p>客户端通过向授权服务器认证并提交授权许可来请求一个访问令牌。</p>
-</li>
-<li>
-<p>授权服务器认证客户端并验证授权许可，如果有效，发放访问令牌和刷新令牌。</p>
-</li>
-<li>
-<p>客户端向资源服务器提交访问令牌，请求受保护资源。</p>
-</li>
-<li>
-<p>资源服务器验证访问令牌，如果有效，响应请求。</p>
-</li>
-<li>
-<p>重复步骤 3 和 4 直至访问令牌过期。如果客户端知道访问令牌过期，则跳转步骤 7 ；否则，再次请求受保护资源。</p>
-</li>
-<li>
-<p>因为访问令牌无效，资源服务器返回一个无效访问令牌的错误。</p>
-</li>
-<li>
-<p>客户端通过向授权服务器认证并提交刷新令牌来请求一个新的访问令牌。对客户端的认证要求基于客户端类型和授权服务器的策略。</p>
-</li>
-<li>
-<p>授权服务器认证客户端并验证刷新令牌，如果有效，发放一个新的访问令牌（可选地，发放一个新的刷新令牌）。</p>
-</li>
-</ol>
-<p>步骤 3, 4, 5, 6 的内容，如第 7 章所言，超出了本规范的范围。</p>
-
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-          <div class="blog-tags">
-            
-              <a href="https://memo-in-pxx.progn.cc//tags/rfc/">RFC</a>&nbsp;
-            
-              <a href="https://memo-in-pxx.progn.cc//tags/%E7%BF%BB%E8%AF%91/">翻译</a>&nbsp;
-            
-          </div>
+        <div class="posts-list">
+          
+            <article class="post-preview">
+    <a href="https://memo-in-pxx.progn.cc/posts/and-then-there-were-none-1/">
+        <h2 class="post-title">无人生还 1</h2>
         
-
         
-
         
-      </article>
+    </a>
 
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://memo-in-pxx.progn.cc/posts/rfc6749-7/" data-toggle="tooltip" data-placement="top" title="OAuth 2.0 授权框架 7">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://memo-in-pxx.progn.cc/posts/and-then-there-were-none-1/" data-toggle="tooltip" data-placement="top" title="无人生还 1">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on November 5, 2020
+  
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;416&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;张唯一
+    
+  
+  
+</span>
 
 
-      
+    </p>
+    <div class="post-entry">
+        
+            故事发生地点：德文郡斯蒂克尔黑文的士兵岛。 第一章 1 瓦格雷夫法官先生刚刚退休，收到康斯坦斯・卡尔明顿女士的邀请乘坐列车前往士兵岛。邀请函大致内
+        
+    </div>
 
+    
+    <div class="blog-tags">
+        
+        <a href="https://memo-in-pxx.progn.cc//tags/%E4%B9%A6%E6%91%98/">书摘</a>&nbsp;
+        
+        <a href="https://memo-in-pxx.progn.cc//tags/%E5%B0%8F%E8%AF%B4/">小说</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+
+          
+        </div>
+        
+      </div>
     </div>
   </div>
-</div>
 
       
 <footer>
@@ -363,7 +276,7 @@
               </li>
           
           <li>
-            <a href="" title="RSS">
+            <a href="/categories/%E6%97%A0%E4%BA%BA%E7%94%9F%E8%BF%98/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
