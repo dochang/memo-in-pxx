@@ -29,7 +29,12 @@ identifier = "slides"
 [[menu.main]]
 parent = "slides"
 name = "Linux GUI 环境介绍"
-url = "slides/linux-gui"
+url = "slides/linux-gui.html"
+
+[[menu.main]]
+parent = "slides"
+name = "大教堂与集市"
+url = "slides/the-cathedral-and-the-bazaar.html"
 
 [[menu.main]]
 name = "分类"
